@@ -7,6 +7,6 @@ using namespace std;
 
 void main() {
 	PostfixEvaluator test;
-	test.eval("1 1 ||");
+	test.eval("5 -1 -");
 	getchar();
 }

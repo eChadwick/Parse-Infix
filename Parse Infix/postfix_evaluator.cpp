@@ -34,8 +34,15 @@ int PostfixEvaluator::eval(string input_string) {
 			}
 		}
 		else if (next == '-') {
-			if (in.get() == '-')
+			char next_next = in.get();
+			if (next_next == '-')
 				compute("--");
+			else if (isdigit(next_next)) {
+				in.unget();
+				int next_int;
+				in >> next_int;
+				number_stack.push(next_int * -1);
+			}
 			else {
 				in.unget();
 				compute("-");
@@ -110,9 +117,6 @@ void PostfixEvaluator::compute(string op)
 		number_stack.pop();
 		number_stack.push(temp - 1);
 	}
-	//else if (op == "-") {
-		//do negative stuff or subtraction stuff
-	//}
 	else if (op == "^") {
 		int right = number_stack.top();
 		number_stack.pop();
@@ -147,6 +151,13 @@ void PostfixEvaluator::compute(string op)
 		int left = number_stack.top();
 		number_stack.pop();
 		number_stack.push(left + right);
+	}
+	else if (op == "-") {
+		int right = number_stack.top();
+		number_stack.pop();
+		int left = number_stack.top();
+		number_stack.pop();
+		number_stack.push(left - right);
 	}
 	else if (op == ">") {
 		int right = number_stack.top();
