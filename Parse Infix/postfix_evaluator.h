@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <stack>
+#include <sstream>
+#include <cmath>
 using namespace std;
 
 class PostfixEvaluator {

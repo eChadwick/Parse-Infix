@@ -1,7 +1,4 @@
 #include "postfix_evaluator.h"
-#include <sstream>
-#include <cmath>
-using namespace std;
 
 int PostfixEvaluator::eval(string input_string) {
 	while (!number_stack.empty()) {
