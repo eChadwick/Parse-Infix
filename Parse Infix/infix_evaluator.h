@@ -11,8 +11,8 @@ public:
 	// @return is the value of the string as a single integer
 	int eval(string infix_string);
 //private:
-	stack<int>operators;
-	stack<char>operands;
+	stack<int>operands;
+	stack<char>operators;
 
 	// evaluates the stacks as far as possible and pushes the result to operand stack.
 	// @param precedence is the precedence of the next operator to be added to the operator stack.
