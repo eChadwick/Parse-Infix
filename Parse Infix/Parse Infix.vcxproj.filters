@@ -18,25 +18,18 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="postfix_evaluator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="infix_to_postfix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="infix_evaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="infix_to_postfix.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="postfix_evaluator.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="infix_evaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="thoughts for consideration.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

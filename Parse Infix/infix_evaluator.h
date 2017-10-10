@@ -1,27 +1,29 @@
 #pragma once
 
-#include "infix_to_postfix.h"
 #include<string>
 #include<stack>
+#include<iostream>
 using namespace std;
 
-class infix_to_postfix {
+class infix_evaluator {
 public:
 	// @param infix_string is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
 	int eval(string infix_string);
-private:
+//private:
 	stack<int>operators;
 	stack<char>operands;
 
-	// evaluates the stacks as far as possible and pushes the result to operators stack.
-	// @param precedence is the precedence of the next operator to be added to the stack.
+	// evaluates the stacks as far as possible and pushes the result to operand stack.
+	// @param precedence is the precedence of the next operator to be added to the operator stack.
 	void eval_stack(int precedence);
 
-	// evaluates one or many repeated +, -, or ! in a substring of infix_string
-	// @param start is the first index of the substring
+	// evaluates one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
+	// consecutive operators is ignored.
+	// @param start is an interator to the first index of the substring in the infix_string
 	// @param length is the length of the substring
 	// @param operand is the operand which the unary operators will be applied to
+	// @param operator_string is the string of one or many repeated + and/or -  and/or !
 	// @return is the value of operand after unary operations have been applied.
-	int eval_unaries(int start, int length, int operand);
+	int eval_unaries(int start, int length, int operand, string& infix_string);
 };

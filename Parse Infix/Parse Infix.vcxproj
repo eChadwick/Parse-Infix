@@ -147,14 +147,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="infix_evaluator.cpp" />
-    <ClCompile Include="infix_to_postfix.cpp" />
-    <ClCompile Include="postfix_evaluator.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="infix_evaluator.h" />
-    <ClInclude Include="infix_to_postfix.h" />
-    <ClInclude Include="postfix_evaluator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="thoughts for consideration.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
