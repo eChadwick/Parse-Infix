@@ -22,7 +22,7 @@
     <ProjectGuid>{27A83BDA-8ADC-48A6-8C9C-FA75B595080F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>ParseInfix</RootNamespace>
-    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -41,7 +41,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
@@ -146,12 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="expression_exception.cpp" />
     <ClCompile Include="infix_evaluator.cpp" />
     <ClCompile Include="infix_to_postfix.cpp" />
     <ClCompile Include="postfix_evaluator.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="expression_exception.h" />
     <ClInclude Include="infix_evaluator.h" />
     <ClInclude Include="infix_to_postfix.h" />
     <ClInclude Include="postfix_evaluator.h" />
