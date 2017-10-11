@@ -3,6 +3,7 @@
 void infix_evaluator::eval_stack(int precedence)
 {
 }
+
 //infix_string&, int start, length, operand.  Can strip spaces
 int infix_evaluator::eval_unaries(int start, int length, int operand, string& infix_string)
 {	
@@ -42,5 +43,14 @@ int infix_evaluator::eval_unaries(int start, int length, int operand, string& in
 				cout << "Binary operator with single operand at index " << index;
 			}
 		}
+	}
+}
+
+infix_evaluator::evaluate(string input)
+{
+	string::iterator iter = input.begin();
+	while (iter != input.end())
+	{
+
 	}
 }

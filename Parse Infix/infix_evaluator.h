@@ -1,8 +1,9 @@
 #pragma once
 
-#include<string>
-#include<stack>
-#include<iostream>
+#include <string>
+#include <stack>
+#include <map>
+#include <iostream>
 using namespace std;
 
 class infix_evaluator {
@@ -11,9 +12,9 @@ public:
 	// @return is the value of the string as a single integer
 	int eval(string infix_string);
 //private:
-	stack<int>operands;
-	stack<string>operators;
-	const std::map<std::string, int> precedence = {
+	stack<int> operands;
+	stack<string> operators;
+	const map<string, int> precedence = {
         	{ "!", 8 },{ "!!", 8 },{ "++", 8 },{ "--", 8 },
         	{ "^", 7 },
         	{ "*", 6 },{ "/", 6 },{ "%", 6 },
