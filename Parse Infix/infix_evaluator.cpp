@@ -1,12 +1,7 @@
 #include "infix_evaluator.h"
 
-void infix_evaluator::eval_stack(int next_precedence)
+void infix_evaluator::eval_stack(int precedence)
 {
-	if (operators.empty())
-		return;
-	if (next_precedence > precedence.at(operators.top()))
-		return;
-	while(!operators.empty() && )
 }
 
 //infix_string&, int start, length, operand.  Can strip spaces
@@ -17,9 +12,6 @@ int infix_evaluator::eval_unaries(int start, int length, int operand, string& in
 	else {
 		int index = start + length - 1;
 		char token = infix_string[index];
-		if (token != '!' && token != '+' && token != '-') {
-			cout << "Invalid character at index " << index;
-		}
 		int count = 1;
 		while (count < length && infix_string[index] == infix_string[index -1]) {
 			count++;
@@ -54,11 +46,11 @@ int infix_evaluator::eval_unaries(int start, int length, int operand, string& in
 	}
 }
 
-//int infix_evaluator::evaluate(string input)
-//{
-//	string::iterator iter = input.begin();
-//	while (iter != input.end())
-//	{
-//
-//	}
-//}
+infix_evaluator::evaluate(string input)
+{
+	string::iterator iter = input.begin();
+	while (iter != input.end())
+	{
+
+	}
+}
