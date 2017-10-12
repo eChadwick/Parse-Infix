@@ -27,7 +27,7 @@ public:
 
 	// evaluates the stacks as far as possible and pushes the result to operand stack.
 	// @param precedence is the precedence of the next operator to be added to the operator stack.
-	void eval_stack(int precedence);
+	void eval_stack(int next_precedence);
 
 	// evaluates one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
 	// consecutive operators is ignored.
