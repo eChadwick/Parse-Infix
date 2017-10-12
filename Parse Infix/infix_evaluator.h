@@ -1,5 +1,7 @@
 #pragma once
 
+#include "expression_exception.h"
+
 #include <string>
 #include <stack>
 #include <map>
@@ -14,12 +16,11 @@ public:
 //private:
 	stack<int> operands;
 	stack<string> operators;
-	const map<string, int> precedence = {
-        	{ "!", 8 },{ "!!", 8 },{ "++", 8 },{ "--", 8 },
+	const map<string, int> precedences = {
         	{ "^", 7 },
         	{ "*", 6 },{ "/", 6 },{ "%", 6 },
         	{ "+", 5 },{ "-", 5 },
-        	{ ">", 4 },{ ">=", 4 },{ "<", 4 },
+        	{ ">", 4 },{ ">=", 4 },{ "<", 4 },{ "<=", 4 },
         	{ "==", 3 },{ "!=", 3 },
         	{ "&&", 2 },
         	{ "||", 1 },
