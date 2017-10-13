@@ -12,7 +12,7 @@ class infix_evaluator {
 public:
 	// @param infix_string is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
-	int eval(string infix_string);
+	int evaluate(string infix_string);
 //private:
 	stack<int> operands;
 	stack<string> operators;
@@ -43,6 +43,4 @@ public:
 	// back to the operand stack.
 	// @param op is the binary operator
 	void eval_binary(string op);
-	
-	int evaluate(string input);
 };

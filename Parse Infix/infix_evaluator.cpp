@@ -221,7 +221,7 @@ int infix_evaluator::evaluate(string input)
 			++index;
 		}
 
-		eval_unaries(start, length, stoul(s_operand), input);
+		eval_unaries(start, length, input);
 		operands.push(stoul(s_operand));
 
 		while (iter != input.end())
