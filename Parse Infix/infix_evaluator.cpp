@@ -19,7 +19,7 @@ void infix_evaluator::eval_stack(int precedence)
 }
 
 //infix_string&, int start, length, operand.  Can strip spaces
-void infix_evaluator::eval_unaries(int start, int length, string& infix_string)
+void infix_evaluator::parse_unaries(int start, int length, string& infix_string)
 {	
 	stack<string> temp_stack;
 	int index = start + length - 1;
@@ -200,7 +200,7 @@ int infix_evaluator::evaluate(string input)
 			while (*iter == '(')
 			{
 				if (length > 0)
-					eval_unaries(start, length, input);
+					parse_unaries(start, length, input);
 				operators.push("(");
 				++iter;
 				++index;
@@ -224,7 +224,7 @@ int infix_evaluator::evaluate(string input)
 			++index;
 		}
 
-		eval_unaries(start, length, input);
+		parse_unaries(start, length, input);
 		operands.push(stoul(s_operand));
 
 		while (iter != input.end())

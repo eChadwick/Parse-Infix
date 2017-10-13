@@ -37,7 +37,7 @@ public:
 	// @param operand is the operand which the unary operators will be applied to
 	// @param operator_string is the string of one or many repeated + and/or -  and/or !
 	// @return is the value of operand after unary operations have been applied.
-	void eval_unaries(int start, int length, string& infix_string);
+	void parse_unaries(int start, int length, string& infix_string);
 
 	// Evaluates binary operator using the top 2 operands on the stack and pushes the result
 	// back to the operand stack.
