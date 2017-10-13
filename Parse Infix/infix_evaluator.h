@@ -2,6 +2,7 @@
 
 #include "expression_exception.h"
 
+#include <cctype>
 #include <string>
 #include <stack>
 #include <map>
@@ -12,7 +13,7 @@ class infix_evaluator {
 public:
 	// @param infix_string is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
-	int eval(string infix_string);
+	int evaluate(string input);
 //private:
 	stack<int> operands;
 	stack<string> operators;
@@ -38,6 +39,4 @@ public:
 	// @param operator_string is the string of one or many repeated + and/or -  and/or !
 	// @return is the value of operand after unary operations have been applied.
 	int eval_unaries(int start, int length, int operand, string& infix_string);
-	
-	int evaluate(string input);
 };
