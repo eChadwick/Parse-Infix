@@ -4,32 +4,61 @@
 
 void infix_evaluator::eval_stack(int precedence)
 {
+	if (precedence == 0) {
+		while (operands.top() != NULL && operands.top() != '('){
+			eval_binary(operators.top());
+		}
+		if (operands.top() == NULL)
+			cout << "Unbalanced parentheses";
+		if (operands.top() == '(')
+			operands.pop();
+	}
+	else {
+		while (precedence <= precedences.at(operators.top())) {
+			eval_binary(operators.top());
+		}
+	}
 }
 
 //infix_string&, int start, length, operand.  Can strip spaces
-int infix_evaluator::eval_unaries(int start, int length, int operand, string& infix_string)
+void infix_evaluator::eval_unaries(int start, int length, string& infix_string)
 {	
 	if (length == 0)
-		return operand;
+		return;
 	else {
 		int index = start + length - 1;
 		char token = infix_string[index];
-		int count = 1;
-		while (count < length && infix_string[index] == infix_string[index -1]) {
-			count++;
+		while (token == ' ') {
+			index--;
+			token = infix_string[index];
+		}
+		if (token != '!' && token != '+' && token != '-') {
+			cout << "Invalid unary token at index " << index;
+		}
+		int count = 0;
+		while (index >= start && (token == infix_string[index]) || infix_string[index] == ' ') {
+			if (infix_string[index] == token) {
+				count++;
+			}
 			index--;
 		}
 		if (token == '!') {
-			if (count % 2 == 0)
-				eval_unaries(start, length - count, !!operand, infix_string);
-			else
-				eval_unaries(start, length - count, !operand, infix_string);
-		}else if (token == '+') {
+			if (count % 2 == 0) {
+				operators.push("!");
+				operators.push("!");
+				eval_unaries(start, index - start + 1, infix_string);
+			}
+			else {
+				operators.push("!");
+				eval_unaries(start, index - start + 1, infix_string);
+			}
+		}
+		else if (token == '+') {
 			if (count % 2 == 0) {
 				for (int i = 0; i < count / 2; i++) {
-					operand++;
+					operators.push("++");
 				}
-				eval_unaries(start, length - count, operand, infix_string);
+				eval_unaries(start, index - start + 1, infix_string);
 			}
 			else {
 				cout << "Binary operator with single operand at index " << index;
@@ -37,14 +66,119 @@ int infix_evaluator::eval_unaries(int start, int length, int operand, string& in
 		}else if (token == '-') {
 			if (count % 2 == 0) {
 				for (int i = 0; i < count / 2; i++) {
-					operand--;
+					operators.push("--");
 				}
-				eval_unaries(start, length - count, operand, infix_string);
+				eval_unaries(start, index - start + 1, infix_string);
 			}
 			else {
 				cout << "Binary operator with single operand at index " << index;
 			}
 		}
+	}
+}
+
+void infix_evaluator::eval_binary(string op)
+{
+	if (op == " ") {
+		return;
+	}
+	else if (op == "^") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(pow(left, right));
+	}
+	else if (op == "*") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left * right);
+	}
+	else if (op == "/") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left / right);
+	}
+	else if (op == "%") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left % right);
+	}
+	else if (op == "+") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left + right);
+	}
+	else if (op == "-") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left - right);
+	}
+	else if (op == ">") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left > right);
+	}
+	else if (op == "<") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left < right);
+	}
+	else if (op == ">=") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left >= right);
+	}
+	else if (op == "<=") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left <= right);
+	}
+	else if (op == "==") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left == right);
+	}
+	else if (op == "!=") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left != right);
+	}
+	else if (op == "&&") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left && right);
+	}
+	else if (op == "||") {
+		int right = operands.top();
+		operands.pop();
+		int left = operands.top();
+		operands.pop();
+		operands.push(left || right);
 	}
 }
 
@@ -73,7 +207,7 @@ int infix_evaluator::evaluate(string input)
 			++index;
 		}
 
-		operands.push(eval_unaries(start, length, stoul(s_operand), input));
+		//operands.push(eval_unaries(start, length, stoul(s_operand), input));
 
 		while (iter != input.end() && *iter == ' ')
 		{
