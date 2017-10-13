@@ -16,7 +16,6 @@ void main() {
 		test.evaluate("++5");
 		test.evaluate("5");
 
-		cout << endl << "Evaluating unary: " << test.eval_unaries(3, 6, 5, test_string);
 	}
 	catch(expression_exception ee)
 	{
