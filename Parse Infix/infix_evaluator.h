@@ -17,14 +17,15 @@ public:
 	stack<int> operands;
 	stack<string> operators;
 	const map<string, int> precedences = {
-        	{ "^", 7 },
-        	{ "*", 6 },{ "/", 6 },{ "%", 6 },
-        	{ "+", 5 },{ "-", 5 },
-        	{ ">", 4 },{ ">=", 4 },{ "<", 4 },{ "<=", 4 },
-        	{ "==", 3 },{ "!=", 3 },
-        	{ "&&", 2 },
-        	{ "||", 1 },
-    	};
+		{ "!", 8 },{ "!!", 8 },{ "++", 8 },{ "--", 8 },
+        { "^", 7 },
+       	{ "*", 6 },{ "/", 6 },{ "%", 6 },
+       	{ "+", 5 },{ "-", 5 },
+       	{ ">", 4 },{ ">=", 4 },{ "<", 4 },{ "<=", 4 },
+       	{ "==", 3 },{ "!=", 3 },
+       	{ "&&", 2 },
+       	{ "||", 1 },
+   	};
 
 	// evaluates the stacks as far as possible and pushes the result to operand stack.
 	// @param precedence is the precedence of the next operator to be added to the operator stack.
