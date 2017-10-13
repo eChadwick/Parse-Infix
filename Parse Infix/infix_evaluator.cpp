@@ -4,7 +4,7 @@ void infix_evaluator::eval_stack(int precedence)
 {
 	if (precedence == 0) {
 		while (operands.top() != NULL && operands.top() != '('){
-			eval_binary(operators.top());
+			eval_operator(operators.top());
 		}
 		if (operands.top() == NULL)
 			cout << "Unbalanced parentheses";
@@ -13,7 +13,7 @@ void infix_evaluator::eval_stack(int precedence)
 	}
 	else {
 		while (precedence <= precedences.at(operators.top())) {
-			eval_binary(operators.top());
+			eval_operator(operators.top());
 		}
 	}
 }
@@ -78,7 +78,7 @@ void infix_evaluator::parse_unaries(int start, int length, string& infix_string)
 	}
 }
 
-void infix_evaluator::eval_binary(string op)
+void infix_evaluator::eval_operator(string op)
 {
 	if (op == " ") {
 		return;

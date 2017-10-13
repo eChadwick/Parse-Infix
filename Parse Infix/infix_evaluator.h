@@ -42,5 +42,5 @@ public:
 	// Evaluates binary operator using the top 2 operands on the stack and pushes the result
 	// back to the operand stack.
 	// @param op is the binary operator
-	void eval_binary(string op);
+	void eval_operator(string op);
 };
