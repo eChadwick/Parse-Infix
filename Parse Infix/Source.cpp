@@ -9,6 +9,6 @@ void main() {
 	//test.evaluate(test_string);
 	//cout << endl << "Evaluating unary: " << test.eval_unaries(3, 5, 5, test_string);
 
-	test.eval_unaries(2, 15, test_string);
+	test.parse_unaries(2, 15, test_string);
 	getchar();
 }
