@@ -1,5 +1,5 @@
+#include <cstdlib>
 #include <iostream>
-#include <cstdio>
 #include "infix_evaluator.h"
 using namespace std;
 
@@ -7,7 +7,7 @@ void main() {
 	infix_evaluator test;
 	try
 	{
-		string test_string = "10+----5";
+		string test_string = "10! !!++ ++- --- 5";
 		test.evaluate(test_string);
 
 		test.evaluate("10++5");

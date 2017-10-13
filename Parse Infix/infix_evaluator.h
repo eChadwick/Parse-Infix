@@ -2,7 +2,6 @@
 
 #include "expression_exception.h"
 
-#include <cctype>
 #include <string>
 #include <stack>
 #include <map>
@@ -31,12 +30,17 @@ public:
 	// @param precedence is the precedence of the next operator to be added to the operator stack.
 	void eval_stack(int precedence);
 
-	// evaluates one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
+	// Evaluates one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
 	// consecutive operators is ignored.
 	// @param start is an interator to the first index of the substring in the infix_string
 	// @param length is the length of the substring
 	// @param operand is the operand which the unary operators will be applied to
 	// @param operator_string is the string of one or many repeated + and/or -  and/or !
 	// @return is the value of operand after unary operations have been applied.
-	int eval_unaries(int start, int length, int operand, string& infix_string);
+	void eval_unaries(int start, int length, string& infix_string);
+
+	// Evaluates binary operator using the top 2 operands on the stack and pushes the result
+	// back to the operand stack.
+	// @param op is the binary operator
+	void eval_binary(string op);
 };
