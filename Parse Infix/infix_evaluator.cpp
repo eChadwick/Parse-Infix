@@ -2,18 +2,31 @@
 
 void infix_evaluator::eval_stack(int precedence)
 {
-	if (precedence == 0) {
-		while (operands.top() != NULL && operands.top() != '('){
+	if (operators.top() == ")") {
+		operators.pop();
+		while (!operators.empty() && operators.top() != "("){
 			eval_operator(operators.top());
+			operators.pop();
 		}
-		if (operands.top() == NULL)
+		if (operators.empty())
 			cout << "Unbalanced parentheses";
-		if (operands.top() == '(')
-			operands.pop();
+		if (operators.top() == "(")
+			operators.pop();
 	}
 	else {
-		while (precedence <= precedences.at(operators.top())) {
+		
+		while (!operators.empty())
+		{
+			if (operators.top() == "(")
+				if (precedence == 0)
+					throw expression_exception(0, "");
+				else
+					break;
+			else if (precedence > precedences.at(operators.top()))
+				break;
+
 			eval_operator(operators.top());
+			operators.pop();
 		}
 	}
 }
@@ -36,7 +49,7 @@ void infix_evaluator::parse_unaries(int start, int length, string& infix_string)
 			}
 		}
 			int count = 0;
-			while (index >= start && (token == infix_string[index]) || infix_string[index] == ' ') {
+			while (index >= start && (token == infix_string[index] || infix_string[index] == ' ')) {
 				if (infix_string[index] == token) {
 					count++;
 				}
