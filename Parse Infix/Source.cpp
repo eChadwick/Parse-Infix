@@ -8,13 +8,13 @@ void main() {
 	try
 	{
 		string test_string = "10! !!++ ++- --- 5";
-		test.evaluate(test_string);
+		cout << endl << test.evaluate(test_string);
 
-		test.evaluate("10++5");
-		test.evaluate("10 5");
-		test.evaluate("10+5-");
-		test.evaluate("++5");
-		test.evaluate("5");
+		cout << endl << endl << test.evaluate("10++5");
+		cout << endl << test.evaluate("10 5");
+		cout << endl << test.evaluate("10+5-");
+		cout << endl << test.evaluate("++5");
+		cout << endl << test.evaluate("5");
 
 	}
 	catch(expression_exception ee)
