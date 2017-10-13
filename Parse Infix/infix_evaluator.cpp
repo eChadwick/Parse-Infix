@@ -83,6 +83,21 @@ void infix_evaluator::eval_operator(string op)
 	if (op == " ") {
 		return;
 	}
+	else if (op == "!") {
+		int temp = operands.top();
+		operands.pop();
+		operands.push(!temp);
+	}
+	else if (op == "++") {
+		int temp = operands.top();
+		operands.pop();
+		operands.push(temp + 1);
+	}
+	else if (op == "--") {
+		int temp = operands.top();
+		operands.pop();
+		operands.push(temp - 1);
+	}
 	else if (op == "^") {
 		int right = operands.top();
 		operands.pop();
