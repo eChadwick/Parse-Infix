@@ -1,7 +1,5 @@
 #include "infix_evaluator.h"
 
-
-
 void infix_evaluator::eval_stack(int precedence)
 {
 	if (precedence == 0) {
@@ -190,15 +188,31 @@ int infix_evaluator::evaluate(string input)
 	{
 		// Unary Search
 		unsigned int start = index;
+		unsigned int length = 0;
 		while (!isdigit(*iter))
 		{
+			if (*iter == ')')
+				throw expression_exception(index, "Unexpected closing parenthesis");
+
+			while (*iter == '(')
+			{
+				if (length > 0)
+					eval_unaries(start, length, input);
+				operators.push("(");
+				++iter;
+				++index;
+				start = index;
+				length = 0;
+			}
+
+			++length;
 			++iter;
 			++index;
 			if (iter == input.end())
 				throw expression_exception(index, "Unexpected end of expression");
 		}
 
-		unsigned int length = index - start;
+		//unsigned int length = index - start;
 		string s_operand;
 		while (iter != input.end() && isdigit(*iter))
 		{
@@ -207,12 +221,29 @@ int infix_evaluator::evaluate(string input)
 			++index;
 		}
 
-		//operands.push(eval_unaries(start, length, stoul(s_operand), input));
+		eval_unaries(start, length, stoul(s_operand), input);
+		operands.push(stoul(s_operand));
 
-		while (iter != input.end() && *iter == ' ')
+		while (iter != input.end())
 		{
-			++iter;
-			++index;
+			if (*iter == ' ')
+			{
+				++iter;
+				++index;
+			}
+			else if (*iter == ')')
+			{
+				operators.push(")");
+				eval_stack(0);
+				++iter;
+				++index;
+			}
+			else if (isdigit(*iter))
+				throw expression_exception(index, "Unexpected operand");
+			else if (*iter == '(')
+				throw expression_exception(index, "Unexpected opening parenthesis");
+			else
+				break;
 		}
 
 		// The only valid place to end evaluation -- after an operand.
@@ -223,8 +254,6 @@ int infix_evaluator::evaluate(string input)
 
 			return operands.top();
 		}
-		else if (isdigit(*iter))
-			throw expression_exception(index, "Unexpected operand");
 			
 
 		string binary;
