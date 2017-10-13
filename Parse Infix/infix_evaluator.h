@@ -12,7 +12,7 @@ class infix_evaluator {
 public:
 	// @param infix_string is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
-	int evaluate(string infix_string);
+	int evaluate(string input);
 //private:
 	stack<int> operands;
 	stack<string> operators;
