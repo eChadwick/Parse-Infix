@@ -1,13 +1,13 @@
 #pragma once
 
 #include "expression_exception.h"
-
 #include <string>
 #include <stack>
 #include <map>
 #include <iostream>
 using namespace std;
 
+// A class for evaluating an infix expression and returning its value as an integer.
 class infix_evaluator {
 public:
 	// @param input is the infix expression to evaluate.
