@@ -32,71 +32,6 @@ void InfixEvaluator::eval_stack(int precedence)
 	}
 }
 
-//infix_string&, int start, length, operand.  Can strip spaces
-void InfixEvaluator::parse_unaries(int start, int length, string& infix_string)
-{
-	stack<string> temp_stack;
-	int index = start + length - 1;
-	while (index >= start) {
-		char token = infix_string[index];
-
-		if (token == ' ')
-		{
-			index--;
-			continue;
-		}
-
-		if (token != '!' && token != '+' && token != '-')
-			throw ExpressionException(index, "Unexpected symbol " + token);
-
-		int count = 0;
-		while (index >= start) {
-			if (infix_string[index] == token) {
-				count++;
-				index--;
-			}
-			else if (infix_string[index] == ' ') {
-				index--;
-			}
-			else
-				break;
-		}
-		if (token == '!') {
-			if (count % 2 == 0) {
-				temp_stack.push("!");
-				temp_stack.push("!");
-			}
-			else {
-				temp_stack.push("!");
-			}
-		}
-		else if (token == '+') {
-			if (count % 2 == 0) {
-				for (int i = 0; i < count / 2; i++) {
-					temp_stack.push("++");
-				}
-			}
-			else {
-				throw ExpressionException(index, "Binary operator with single operand");
-			}
-		}
-		else if (token == '-') {
-			if (count % 2 == 0) {
-				for (int i = 0; i < count / 2; i++) {
-					temp_stack.push("--");
-				}
-			}
-			else {
-				throw ExpressionException(index, "Binary operator with single operand");
-			}
-		}
-	}
-	while (!temp_stack.empty()) {
-		operators.push(temp_stack.top());
-		temp_stack.pop();
-	}
-}
-
 void InfixEvaluator::eval_operator(string op)
 {
 	int right = operands.top();
@@ -145,8 +80,6 @@ int InfixEvaluator::evaluate(string input)
 
 			if (*iter == '(')
 			{
-				if (length > 0)
-					parse_unaries(start, length, input);
 				operators.push("(");
 				++iter;
 				++index;

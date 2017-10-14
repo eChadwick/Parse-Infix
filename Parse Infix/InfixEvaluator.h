@@ -33,15 +33,6 @@ private:
 	// Passing 0 will evaluate until either '(' is found or the stack is empty.
 	void eval_stack(int precedence);
 
-	// Evaluate one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
-	// consecutive operators is ignored.
-	// @param start is an interator to the first index of the substring in the infix_string
-	// @param length is the length of the substring
-	// @param operand is the operand which the unary operators will be applied to
-	// @param operator_string is the string of one or many repeated + and/or -  and/or !
-	// @return is the value of operand after unary operations have been applied.
-	void parse_unaries(int start, int length, string& infix_string);
-
 	// Evaluate an operator.  Pop correct number of operands, apply operator and push result to operand
 	// stack.
 	// @param op is the operator to be evaluated.
