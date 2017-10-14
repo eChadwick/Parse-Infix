@@ -50,11 +50,16 @@ void infix_evaluator::parse_unaries(int start, int length, string& infix_string)
 			throw expression_exception(index, "Unexpected symbol " + token);
 
 		int count = 0;
-		while (index >= start && (token == infix_string[index]) || infix_string[index] == ' ') {
+		while (index >= start) {
 			if (infix_string[index] == token) {
 				count++;
+				index--;
 			}
-			index--;
+			else if (infix_string[index] == ' ') {
+				index--;
+			}
+			else
+				break;
 		}
 		if (token == '!') {
 			if (count % 2 == 0) {
