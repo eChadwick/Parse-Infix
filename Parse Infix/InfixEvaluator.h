@@ -1,6 +1,6 @@
 #pragma once
 
-#include "expression_exception.h"
+#include "ExpressionException.h"
 
 #include <string>
 #include <stack>
@@ -8,16 +8,16 @@
 #include <iostream>
 using namespace std;
 
-class infix_evaluator {
+class InfixEvaluator {
 public:
 	// @param infix_string is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
 	int evaluate(string input);
-//private:
+private:
 	stack<int> operands;
 	stack<string> operators;
 	const map<string, int> precedences = {
-		{ "!", 8 },{ "!!", 8 },{ "++", 8 },{ "--", 8 },
+		{ "!", 8 },{ "!!", 8 },{ "++", 8 },{ "--", 8 },{ "-1", 8 },
         { "^", 7 },
        	{ "*", 6 },{ "/", 6 },{ "%", 6 },
        	{ "+", 5 },{ "-", 5 },

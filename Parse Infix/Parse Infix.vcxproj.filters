@@ -18,18 +18,18 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="infix_evaluator.cpp">
+    <ClCompile Include="InfixEvaluator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="expression_exception.cpp">
+    <ClCompile Include="ExpressionException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="infix_evaluator.h">
+    <ClInclude Include="ExpressionException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="expression_exception.h">
+    <ClInclude Include="InfixEvaluator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

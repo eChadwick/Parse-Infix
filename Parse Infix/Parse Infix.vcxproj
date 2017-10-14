@@ -146,13 +146,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="expression_exception.cpp" />
-    <ClCompile Include="infix_evaluator.cpp" />
+    <ClCompile Include="ExpressionException.cpp" />
+    <ClCompile Include="InfixEvaluator.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="expression_exception.h" />
-    <ClInclude Include="infix_evaluator.h" />
+    <ClInclude Include="ExpressionException.h" />
+    <ClInclude Include="InfixEvaluator.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="thoughts for consideration.txt" />

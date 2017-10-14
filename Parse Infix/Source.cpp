@@ -1,71 +1,22 @@
 #include <cstdlib>
 #include <iostream>
-#include "infix_evaluator.h"
+#include "InfixEvaluator.h"
 using namespace std;
 
 void main() {
-	infix_evaluator test;
+	InfixEvaluator test;
 	try
 	{
-
-		/*test.operands.push(5);
-		test.operands.push(2);
-		test.operands.push(2);	
-
-		test.operators.push("++");
-		test.operators.push("(");
-		test.operators.push("*");
-		test.operators.push("(");
-		test.operators.push("+");
-		test.operators.push(")");
-
-		test.eval_stack(0);
-		test.eval_stack(test.precedences.at("+"));*/
-
-		/*test.operators.push("++");
-		test.operands.push(20);
-		test.operators.push("(");
-
-
-		test.operators.push("+");
-		test.operators.push("!");
-		test.operators.push("(");
-		test.operands.push(3);
-		test.operators.push("-");
-		test.operands.push(2);
-		test.operators.push(")");
-
-		test.eval_stack(0);
-		
-		test.operators.push(")");
-
-		test.eval_stack(0);
-
-		test.eval_stack(test.precedences.at("*"));
-
-		test.operators.push("*");
-		test.operators.push("++");
-		test.operators.push("(");
-		test.operands.push(7);
-		test.operators.push(")");
-
-		test.eval_stack(0);
-		test.eval_stack(0);*/
-
-		//string test_string = "10! !!++ ++- --- 5";
-		////test.evaluate(test_string);
-
-		//test.evaluate("10++5");
-		//test.evaluate("10 5");
-		//test.evaluate("10+5-");
-		//test.evaluate("++5");
-		//test.evaluate("5");
-
-		cout << test.evaluate("(3  <=3)| |(2==  1) && 1");
-
-
+		cout << endl << test.evaluate("10-! !! ++ ++ ---- 5");
+		cout << endl << test.evaluate("5*7+5-2/2+10+++7");
+		cout << endl << test.evaluate("(4==5==0==1)*80==80");
+		cout << endl << test.evaluate("(--(7^(2+1))+(!!!(!!0))*4)");
+		cout << endl << test.evaluate("(3>2)||(2==1)&&1");
+		cout << endl << test.evaluate("(!(3^2)&&!0)>=1");
+		cout << endl << test.evaluate("1+!!!!!((((((((0))))))))*7^10");
+		cout << endl << test.evaluate("-(72-(-5))<5||0&&!1");
 	}
-	catch(expression_exception ee)
+	catch(ExpressionException ee)
 	{
 		cout << ee.what();
 	}
