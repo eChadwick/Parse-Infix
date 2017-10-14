@@ -2,6 +2,7 @@
 
 void infix_evaluator::eval_stack(int precedence)
 {
+
 	if (operators.top() == ")") {
 		operators.pop();
 		while (!operators.empty() && operators.top() != "("){
@@ -33,58 +34,58 @@ void infix_evaluator::eval_stack(int precedence)
 
 //infix_string&, int start, length, operand.  Can strip spaces
 void infix_evaluator::parse_unaries(int start, int length, string& infix_string)
-{	
+{
 	stack<string> temp_stack;
 	int index = start + length - 1;
 	while (index >= start) {
 		char token = infix_string[index];
-		if (token != '!' && token != '+' && token != '-' && token != ' ') {
-			cout << "Invalid unary token at index " << index;
-		}
-		while (token == ' ') {
+
+		if (token == ' ')
+		{
 			index--;
-			token = infix_string[index];
-			if (token != '!' && token != '+' && token != '-' && token != ' ') {
-				cout << "Invalid unary token at index " << index;
+			continue;
+		}
+
+		if (token != '!' && token != '+' && token != '-')
+			throw expression_exception(index, "Unexpected symbol " + token);
+
+		int count = 0;
+		while (index >= start && (token == infix_string[index]) || infix_string[index] == ' ') {
+			if (infix_string[index] == token) {
+				count++;
+			}
+			index--;
+		}
+		if (token == '!') {
+			if (count % 2 == 0) {
+				temp_stack.push("!");
+				temp_stack.push("!");
+			}
+			else {
+				temp_stack.push("!");
 			}
 		}
-			int count = 0;
-			while (index >= start && (token == infix_string[index] || infix_string[index] == ' ')) {
-				if (infix_string[index] == token) {
-					count++;
-				}
-				index--;
-			}
-			if (token == '!') {
-				if (count % 2 == 0) {
-					temp_stack.push("!");
-					temp_stack.push("!");
-				}
-				else {
-					temp_stack.push("!");
+		else if (token == '+') {
+			if (count % 2 == 0) {
+				for (int i = 0; i < count / 2; i++) {
+					temp_stack.push("++");
 				}
 			}
-			else if (token == '+') {
- 				if (count % 2 == 0) {
-					for (int i = 0; i < count / 2; i++) {
-						temp_stack.push("++");
-					}
-				}
-				else {
-					cout << "Binary operator with single operand at index " << index;
-				}
-			}
-			else if (token == '-') {
-				if (count % 2 == 0) {
-					for (int i = 0; i < count / 2; i++) {
-						temp_stack.push("--");
-					}
-				}
-				else {
-					cout << "Binary operator with single operand at index " << index;
-				}
+			else {
+				throw expression_exception(index, "Binary operator with single operand");
 			}
 		}
+		else if (token == '-') {
+			if (count % 2 == 0) {
+				for (int i = 0; i < count / 2; i++) {
+					temp_stack.push("--");
+				}
+			}
+			else {
+				throw expression_exception(index, "Binary operator with single operand");
+			}
+		}
+	}
 	while (!temp_stack.empty()) {
 		operators.push(temp_stack.top());
 		temp_stack.pop();
@@ -285,7 +286,7 @@ int infix_evaluator::evaluate(string input)
 
 			return operands.top();
 		}
-			
+
 
 		string binary;
 		string double_op = input.substr(index, 2);

@@ -7,6 +7,7 @@ void main() {
 	infix_evaluator test;
 	try
 	{
+
 		/*test.operands.push(5);
 		test.operands.push(2);
 		test.operands.push(2);	
@@ -61,6 +62,7 @@ void main() {
 		//test.evaluate("5");
 
 		cout << test.evaluate("++(5*(2+2)+!(3-2))*++(7)");
+
 
 	}
 	catch(expression_exception ee)
