@@ -143,7 +143,6 @@ int InfixEvaluator::evaluate(string input)
 				throw ExpressionException(index, "Unexpected end of expression");
 		}
 
-		//unsigned int length = index - start;
 		string s_operand;
 		while (iter != input.end() && isdigit(*iter))
 		{
