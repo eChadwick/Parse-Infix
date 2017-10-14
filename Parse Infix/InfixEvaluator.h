@@ -8,9 +8,10 @@
 #include <iostream>
 using namespace std;
 
+// A class for evaluating an infix expression and returning its value as an integer.
 class InfixEvaluator {
 public:
-	// @param infix_string is the infix expression to evaluate.
+	// @param input is the infix expression to evaluate.
 	// @return is the value of the string as a single integer
 	int evaluate(string input);
 private:
@@ -27,11 +28,12 @@ private:
        	{ "||", 1 },
    	};
 
-	// evaluates the stacks as far as possible and pushes the result to operand stack.
+	// Evaluate the stacks as far as necessary to prepare them for the next operator to be pushed.
 	// @param precedence is the precedence of the next operator to be added to the operator stack.
+	// Passing 0 will evaluate until either '(' is found or the stack is empty.
 	void eval_stack(int precedence);
 
-	// Evaluates one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
+	// Evaluate one or many repeated +, -, or ! in a substring of infix_string.  Whitespace between
 	// consecutive operators is ignored.
 	// @param start is an interator to the first index of the substring in the infix_string
 	// @param length is the length of the substring
@@ -40,8 +42,8 @@ private:
 	// @return is the value of operand after unary operations have been applied.
 	void parse_unaries(int start, int length, string& infix_string);
 
-	// Evaluates binary operator using the top 2 operands on the stack and pushes the result
-	// back to the operand stack.
-	// @param op is the binary operator
+	// Evaluate an operator.  Pop correct number of operands, apply operator and push result to operand
+	// stack.
+	// @param op is the operator to be evaluated.
 	void eval_operator(string op);
 };
