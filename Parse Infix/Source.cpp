@@ -61,7 +61,7 @@ void main() {
 		//test.evaluate("++5");
 		//test.evaluate("5");
 
-		cout << test.evaluate("++(5*(2+2)+!(3-2))*++(7)");
+		cout << test.evaluate("(3  <=3)| |(2==  1) && 1");
 
 
 	}

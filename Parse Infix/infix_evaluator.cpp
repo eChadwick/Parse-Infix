@@ -231,7 +231,7 @@ int infix_evaluator::evaluate(string input)
 			if (*iter == ')')
 				throw expression_exception(index, "Unexpected closing parenthesis");
 
-			while (*iter == '(')
+			if (*iter == '(')
 			{
 				if (length > 0)
 					parse_unaries(start, length, input);
@@ -240,6 +240,7 @@ int infix_evaluator::evaluate(string input)
 				++index;
 				start = index;
 				length = 0;
+				continue;
 			}
 
 			++length;
@@ -312,14 +313,14 @@ int infix_evaluator::evaluate(string input)
 			}
 
 		if (precedence < 0)
-			throw new expression_exception(index, "Expected a valid binary operator");
+			throw expression_exception(index, "Expected a valid binary operator");
 
-		if (!operators.empty() && precedence <= precedences.at(operators.top()))
+		if (!operators.empty() && operators.top() != "(" && precedence <= precedences.at(operators.top()))
 			eval_stack(precedence);
 
 		operators.push(binary);
-		++iter;
-		++index;
+		iter += binary.length();
+		index += binary.length();
 
 		if (iter == input.end())
 			throw expression_exception(index, "Unexpected end of expression");
