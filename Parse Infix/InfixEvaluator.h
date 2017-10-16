@@ -5,7 +5,6 @@
 #include <string>
 #include <stack>
 #include <map>
-#include <iostream>
 using namespace std;
 
 // A class for evaluating an infix expression and returning its value as an integer.

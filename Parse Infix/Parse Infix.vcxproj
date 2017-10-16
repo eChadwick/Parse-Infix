@@ -154,9 +154,6 @@
     <ClInclude Include="ExpressionException.h" />
     <ClInclude Include="InfixEvaluator.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="thoughts for consideration.txt" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -1,26 +1,21 @@
 #include "InfixEvaluator.h"
 
-void InfixEvaluator::eval_stack(int precedence)
-{
-
+void InfixEvaluator::eval_stack(int precedence) {
 	if (operators.top() == ")") {
 		operators.pop();
-		while (!operators.empty() && operators.top() != "("){
+		while (!operators.empty() && operators.top() != "(") {
 			eval_operator(operators.top());
 			operators.pop();
 		}
 		if (operators.empty())
-			cout << "Unbalanced parentheses";
+			throw runtime_error("Error in expression: Unbalanced parentheses, missing an opening parenthesis");
 		if (operators.top() == "(")
 			operators.pop();
-	}
-	else {
-		
-		while (!operators.empty())
-		{
+	} else {
+		while (!operators.empty()) {
 			if (operators.top() == "(")
 				if (precedence == 0)
-					throw ExpressionException(0, "");
+					throw runtime_error("Error in expression: Unbalanced parentheses, missing a closing parenthesis");
 				else
 					break;
 			else if (precedence > precedences.at(operators.top()))
@@ -32,8 +27,7 @@ void InfixEvaluator::eval_stack(int precedence)
 	}
 }
 
-void InfixEvaluator::eval_operator(string op)
-{
+void InfixEvaluator::eval_operator(string op) {
 	int right = operands.top();
 	operands.pop();
 
@@ -41,8 +35,7 @@ void InfixEvaluator::eval_operator(string op)
 	else if (op == "++") operands.push(right + 1);
 	else if (op == "--") operands.push(right - 1);
 	else if (op == "-1") operands.push(right * -1);
-	else
-	{
+	else {
 		int left = operands.top();
 		operands.pop();
 
@@ -63,23 +56,18 @@ void InfixEvaluator::eval_operator(string op)
 	}
 }
 
-int InfixEvaluator::evaluate(string input)
-{
+int InfixEvaluator::evaluate(string input) {
 	string::iterator iter = input.begin();
 	unsigned int index = 0;
-	while (iter != input.end())
-	{
-		// Unary Search
+	while (iter != input.end()) {
 		unsigned int start = index;
 		unsigned int length = 0;
 		char token = '?';
-		while (!isdigit(*iter))
-		{
+		while (!isdigit(*iter)) {
 			if (*iter == ')')
 				throw ExpressionException(index, "Unexpected closing parenthesis");
 
-			if (*iter == '(')
-			{
+			if (*iter == '(') {
 				operators.push("(");
 				++iter;
 				++index;
@@ -89,8 +77,7 @@ int InfixEvaluator::evaluate(string input)
 			}
 
 			if (length == 0)
-				switch (*iter)
-				{
+				switch (*iter) {
 				case '+': case '-': case '!':
 					token = *iter;
 					length = 1;
@@ -103,14 +90,11 @@ int InfixEvaluator::evaluate(string input)
 			
 			if (*(iter + 1) == token)
 				++length;
-			else
-			{
+			else {
 				if (length % 2)
-					switch (token)
-					{
+					switch (token) {
 					case '-':
-						if (isdigit(*(iter + 1)) || *(iter + 1) == '(')
-						{
+						if (isdigit(*(iter + 1)) || *(iter + 1) == '(') {
 							operators.push("-1");
 							length--;
 							break;
@@ -125,12 +109,10 @@ int InfixEvaluator::evaluate(string input)
 						operators.push("!");
 					}
 				if (!(length % 2))
-					if (token == '!')
-					{
+					if (token == '!') {
 						operators.push("!");
 						operators.push("!");
-					}
-					else
+					} else
 						for (int i = 0; i < length / 2; i++)
 							operators.push(string(new char[3] { token, token, '\0' }));
 
@@ -144,8 +126,7 @@ int InfixEvaluator::evaluate(string input)
 		}
 
 		string s_operand;
-		while (iter != input.end() && isdigit(*iter))
-		{
+		while (iter != input.end() && isdigit(*iter)) {
 			s_operand += *iter;
 			++iter;
 			++index;
@@ -153,15 +134,11 @@ int InfixEvaluator::evaluate(string input)
 
 		operands.push(stoul(s_operand));
 
-		while (iter != input.end())
-		{
-			if (*iter == ' ')
-			{
+		while (iter != input.end()) {
+			if (*iter == ' ') {
 				++iter;
 				++index;
-			}
-			else if (*iter == ')')
-			{
+			} else if (*iter == ')') {
 				operators.push(")");
 				eval_stack(0);
 				++iter;
@@ -175,9 +152,7 @@ int InfixEvaluator::evaluate(string input)
 				break;
 		}
 
-		// The only valid place to end evaluation -- after an operand.
-		if (iter == input.end())
-		{
+		if (iter == input.end()) {
 			if (!operators.empty())
 				eval_stack(0);
 
